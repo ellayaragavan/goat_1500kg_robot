@@ -1,0 +1,26 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/paramesh/Desktop/Reception_robot_EC/Ultrasonic_main_board_espnow'
+ 
+The following Python requirements are not satisfied:
+click>=7.0
+pyparsing>=2.0.3,<2.4.0
+pyelftools>=0.22
+gdbgui==0.13.2.0
+pygdbmi<=0.9.0.2
+python-socketio<5
+kconfiglib==13.7.1
+reedsolo>=1.5.3,<=1.5.4
+bitstring>=3.1.6
+ecdsa>=0.16.0
+construct==2.10.54
+Please follow the instructions found in the "Set up the tools" section of ESP-IDF Getting Started Guide
+Diagnostic information:
+    IDF_PYTHON_ENV_PATH: (not set)
+    Python interpreter used: /usr/bin/python
+    Warning: python interpreter not running from IDF_PYTHON_ENV_PATH
+    PATH: /home/paramesh/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+ 
+make: *** No rule to make target 'check_python_dependencies', needed by 'all'.
+
+make: Leaving directory '/home/paramesh/Desktop/Reception_robot_EC/Ultrasonic_main_board_espnow'
+ 

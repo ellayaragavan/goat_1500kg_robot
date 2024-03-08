@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>ESP32 OTA Update</title>
+	<style>
+		#otaHeading{
+			font-size: 24px;
+			color:darkred;
+		}
+		#sampleText {
+			position: fixed;
+			bottom: 10px;
+			right: 10px;
+			font-size: 12px;
+			color:darkred;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<h1 id="otaHeading">ESP32 OTA Firmware Update</h1>
+		<br>
+		<div id="loginForm">
+			<h1 style="font-size: 18px;">Login</h1>
+			<br>
+			<div>
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username" />
+			</div>
+			<br>
+			<div>
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" />
+			</div>
+			<br>
+			<div>
+				<button type="button" onclick="authenticate()">Login</button>
+				<button id="restartButton" type="button" onclick="restartDevice()">Restart Device</button>
+			</div>
+		</div>
+
+		<div id="mainContent" style="display: none;">
+			<div>
+				<label for="otafile">Choose Firmware file:</label>
+				<input type="file" id="otafile" name="otafile" />
+			</div>
+			<br>
+			<div>
+				<button id="upload" type="button" onclick="startUpload()"
+					style="background-color: rgb(230, 173, 174);">Upload</button>
+			</div>
+			<br>
+			<div id="progress"></div>
+			<br>
+			<h2>Current Firmware Details</h2>
+			<table>
+				<tr>
+					<th>STA Mac Address:</th>
+					<td id="staMacAddress"></td>
+				</tr>
+				<tr>
+					<th>AP Mac Address:</th>
+					<td id="apMacAddress"></td>
+				</tr>
+				<tr>
+					<th>Firmware Version:</th>
+					<td id="appVersion"></td>
+				</tr>
+				<tr>
+					<th>ESP-IDF Version:</th>
+					<td id="espIdfVersion"></td>
+				</tr>
+				<tr>
+					<th>Project Name:</th>
+					<td id="projectName"></td>
+				</tr>
+				<tr>
+					<th>Compile Time:</th>
+					<td id="compileTime"></td>
+				</tr>
+			</table>
+			<br>
+			<div>
+				<button id="restartButton" type="button" onclick="restartDevice()">Restart Device</button>
+			</div>
+		</div>
+	</center>
+	<div id="sampleText">Powered By: Embedded lwIP Stack</div>
+
+	<script>
+		function authenticate() {
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+
+			// Perform authentication logic here
+			// You can use AJAX requests to validate the username and password on the server-side
+
+			// For demonstration purposes, let's assume the username is "admin" and the password is "password"
+			if (username === "embedded" && password === "dotkat123") {
+				document.getElementById("loginForm").style.display = "none";
+				document.getElementById("mainContent").style.display = "block";
+				updateDeviceInformation();
+			} else {
+				alert("Invalid username or password. Please try again.");
+			}
+		}
+
+		function startUpload() {
+			var otafile = document.getElementById("otafile").files;
+
+			if (otafile.length == 0) {
+				alert("No file selected!");
+			} else {
+				document.getElementById("otafile").disabled = true;
+				document.getElementById("upload").disabled = true;
+
+				var file = otafile[0];
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState == 4) {
+						if (xhr.status == 200) {
+							document.open();
+							document.write(xhr.responseText);
+							document.close();
+						} else if (xhr.status == 0) {
+							alert("Server closed the connection abruptly!");
+							location.reload();
+						} else {
+							alert(xhr.status + " Error!\n" + xhr.responseText);
+							location.reload();
+						}
+					}
+				};
+
+				xhr.upload.onprogress = function (e) {
+					var progress = document.getElementById("progress");
+					progress.textContent = "Progress: " + (e.loaded / e.total * 100).toFixed(0) + "%";
+				};
+				xhr.open("POST", "/update", true);
+				xhr.send(file);
+			}
+		}
+
+		function getMacAddress() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var macAddresses = xhr.responseText.split("\n");
+					document.getElementById("staMacAddress").textContent = macAddresses[0];
+					document.getElementById("apMacAddress").textContent = macAddresses[1];
+				}
+			};
+			xhr.open("GET", "/macaddress", true);
+			xhr.send();
+		}
+
+		function getAppVersion() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					document.getElementById("appVersion").textContent = xhr.responseText;
+				}
+				;
+			};
+			xhr.open("GET", "/version", true);
+			xhr.send();
+		}
+
+		function getEspIdfVersion() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					document.getElementById("espIdfVersion").textContent = xhr.responseText;
+				}
+			};
+			xhr.open("GET", "/esp_idf_version", true);
+			xhr.send();
+		}
+
+		function getProjectName() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					document.getElementById("projectName").textContent = xhr.responseText;
+				}
+			};
+			xhr.open("GET", "/project_name", true);
+			xhr.send();
+		}
+
+		function getCompileTime() {
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					document.getElementById("compileTime").textContent = xhr.responseText;
+				}
+			};
+			xhr.open("GET", "/compile_time", true);
+			xhr.send();
+		}
+
+		function restartDevice() {
+			if (confirm("Are you sure you want to restart the ESP32?")) {
+				// Send a request to the ESP32 to initiate restart
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "/restart", true);
+				xhr.send();
+
+				// Reload the page after restart
+				xhr.onload = function () {
+					if (xhr.status === 200) {
+						location.reload();
+					} else {
+						alert("Failed to restart the device.");
+					}
+				};
+			}
+		}
+
+		function updateDeviceInformation() {
+			// Update device information using AJAX requests
+			getMacAddress();
+			getAppVersion();
+			getEspIdfVersion();
+			getProjectName();
+			getCompileTime();
+		}
+
+	</script>
+</body>
+
+</html>

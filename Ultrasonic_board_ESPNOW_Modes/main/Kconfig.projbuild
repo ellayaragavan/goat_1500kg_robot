@@ -1,0 +1,198 @@
+menu "Ultrasonic Board Configuration"
+    config MASTER_MAC_ADDRESS
+        string "Master MAC Address"
+        default "246F285C3714"
+        help
+            Enter MAC Address of Master to connect.
+
+    choice ULTRASONIC_DATA_MODE
+        prompt "Ultrasonic data mode"
+        default ULTRASONIC_SPEED_MODE
+        help
+            Select ultrasonic data mode Normal or speed . Speed mode only uses maximum of 6 sensors and normal mode uses maximum of 8 sensors
+        config ULTRASONIC_SPEED_MODE
+            bool "Speed mode"
+        config ULTRASONIC_NORMAL_MODE
+            bool "Normal mode"
+    endchoice
+
+    config NUMBER_OF_SENSORS
+        int "Number of Sensors"
+        depends on ULTRASONIC_SPEED_MODE
+        default 6
+        range 1 6
+        help
+            Number of Sensors to connect <Maximum 6 only>
+
+    config J4_CONNECTOR_ENABLE
+        bool "Enable J4 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J4 Connector in Ultrasonic PCB
+    config J4_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J4_CONNECTOR_ENABLE
+        range 1 6
+        default 1
+        help
+            Enter the sensor number first sensor will be 0 and last sensor will be 6 
+    config J10_CONNECTOR_ENABLE
+        bool "Enable J10 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J10 Connector in Ultrasonic PCB
+    config J10_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J10_CONNECTOR_ENABLE
+        range 1 6
+        default 2
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6
+    config J6_CONNECTOR_ENABLE
+        bool "Enable J6 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J6 Connector in Ultrasonic PCB
+    config J6_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J6_CONNECTOR_ENABLE
+        range 1 6
+        default 3
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config J5_CONNECTOR_ENABLE
+        bool "Enable J5 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J5 Connector in Ultrasonic PCB
+    config J5_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J5_CONNECTOR_ENABLE
+        range 1 6
+        default 4
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config J8_CONNECTOR_ENABLE
+        bool "Enable J8 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J8 Connector in Ultrasonic PCB
+    config J8_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J8_CONNECTOR_ENABLE
+        range 1 6
+        default 5
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config J7_CONNECTOR_ENABLE
+        bool "Enable J7 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default y
+        help
+            Select the checkbox if you are using J7 Connector in Ultrasonic PCB
+    config J7_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J7_CONNECTOR_ENABLE
+        range 1 6
+        default 6
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config J9_CONNECTOR_ENABLE
+        bool "Enable J9 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default n
+        help
+            Select the checkbox if you are using J9 Connector in Ultrasonic PCB
+    config J9_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J9_CONNECTOR_ENABLE
+        range 1 6
+        default 6
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config J11_CONNECTOR_ENABLE
+        bool "Enable J11 connector"
+        depends on ULTRASONIC_SPEED_MODE
+        default n
+        help
+            Select the checkbox if you are using J11 Connector in Ultrasonic PCB
+    config J11_CONNECTOR_SENSOR_NO
+        int "Enter the sensor Number"
+        depends on J11_CONNECTOR_ENABLE
+        range 1 6
+        default 6
+        help
+            Enter the sensor number first sensor will be 1 and last sensor will be 6 
+    config ESPNOW_PMK
+        string "ESPNOW primary master key"
+        default "pmk1234567890123"
+        help
+            ESPNOW primary master for the example to use. The length of ESPNOW primary master must be 16 bytes.
+    config NO_OF_ULTRASONIC_SENSOR
+        int "Enter_no_of_sensors"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 8 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+        help
+            Number of ultrasonic sensor in robot
+    config EXAMPLE_MAX_DISTANCE
+        int "Maximal distance, cm"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 200 if IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+        help
+            Maximum measurable distance. If the distance is greater than this parameter, there will be a timeout
+    config SENSOR_1
+        int "Enter Sensor 1 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 4
+        help
+            Sensor 1 Connector Name Jx to x
+    config SENSOR_2
+        int "Enter Sensor 2 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 10
+        help
+            Sensor 2 Connector Name Jx to x
+    config SENSOR_3
+        int "Enter Sensor 3 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 6
+        help
+            Sensor 3 Connector Name Jx to x
+    config SENSOR_4
+        int "Enter Sensor 4 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 5
+        help
+            Sensor 4 Connector Name Jx to x
+    config SENSOR_5
+        int "Enter Sensor 5 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 8
+        help
+            Sensor 5 Connector Name Jx to x
+    config SENSOR_6
+        int "Enter Sensor 6 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 7
+        help
+            Sensor 6 Connector Name Jx to x
+    config SENSOR_7
+        int "Enter Sensor 7 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 9
+        help
+            Sensor 7 Connector Name Jx to x
+    config SENSOR_8
+        int "Enter Sensor 8 Connector"
+        depends on ULTRASONIC_NORMAL_MODE
+        default 11
+        help
+            Sensor 8 Connector Name Jx to x
+        
+endmenu
+

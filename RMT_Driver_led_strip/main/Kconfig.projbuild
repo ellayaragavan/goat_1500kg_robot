@@ -1,0 +1,61 @@
+menu "RGB Board Configuration"
+    config MASTER_MAC_ADDRESS
+        string "Master MAC Address"
+        default "D36ACA02601A"
+        help
+            Enter MAC Address of Master to connect.
+    config RGB0_CONNECTOR_ENABLE
+        bool "RMT RGB0 Pin"
+        default y
+        help
+            Select the checkbox if you are using RGB0 Connector in RGB PCB
+    config RGB0_GPIO_PIN
+        int "RGB0 GPIO Pin Number"
+        depends on RGB0_CONNECTOR_ENABLE
+        range 0 48
+        default 7
+        help
+            Input gpio number to configure RGB0 rmt pin 
+    config RGB1_CONNECTOR_ENABLE
+        bool "RMT RGB1 Pin"
+        default y
+        help
+            Select the checkbox if you are using RGB1 Connector in RGB PCB
+    config RGB1_GPIO_PIN
+        int "RGB1 GPI0 Pin Number"
+        depends on RGB1_CONNECTOR_ENABLE
+        range 0 48
+        default 6
+        help
+            Input gpio number to configure RGB1 rmt pin
+    config RGB2_CONNECTOR_ENABLE
+        bool "RMT RGB2 Pin"
+        default y
+        help
+            Select the checkbox if you are using RGB2 Connector in RGB PCB
+    config RGB2_GPIO_PIN
+        int "RGB2 GPIO Pin Number"
+        depends on RGB2_CONNECTOR_ENABLE
+        range 0 48
+        default 5
+        help
+            Input gpio number to configure RGB2 rmt pin
+    config RGB3_CONNECTOR_ENABLE
+        bool "RMT RGB3 Pin"
+        default y
+        help
+            Select the checkbox if you are using RGB3 Connector in RGB PCB
+    config RGB3_GPIO_PIN
+        int "RGB3 GPIO Pin Number"
+        depends on RGB3_CONNECTOR_ENABLE
+        range 0 48
+        default 4
+        help
+            Input gpio number to configure RGB3 rmt pin
+    config INDICATOR_ENABLE
+        bool "INDICATOR"
+        default n
+        help
+            Select the checkbox if you are using RGB3 Connector in RGB PCB
+endmenu
+
