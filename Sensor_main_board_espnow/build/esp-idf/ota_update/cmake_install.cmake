@@ -1,4 +1,4 @@
-# Install script for directory: /home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/components/ota_update
+# Install script for directory: /home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/components/ota_update
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

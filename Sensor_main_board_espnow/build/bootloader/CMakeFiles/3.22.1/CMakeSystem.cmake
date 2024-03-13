@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-6.5.0-18-generic")
+set(CMAKE_HOST_SYSTEM "Linux-6.5.0-25-generic")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "6.5.0-18-generic")
+set(CMAKE_HOST_SYSTEM_VERSION "6.5.0-25-generic")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/katomaran-emb/esp/esp-idf/tools/cmake/toolchain-esp32s3.cmake")

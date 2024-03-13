@@ -199,7 +199,7 @@ static void espnow_send_cb(const uint8_t *mac_addr, esp_now_send_status_t status
     }
     else if (status == ESP_NOW_SEND_SUCCESS && print_once == false)
     {
-        ESP_LOGI(TAG, "ESP_SEND_DATA_SUCCESS\n");
+      //  ESP_LOGI(TAG, "ESP_SEND_DATA_SUCCESS\n");
         print_once = true;
     }
 }
@@ -307,11 +307,13 @@ static void read_task_handler(void *pvParameters)
             distance[i] = ultrasonic_read(pulse_count[i]);
             numbers[i] = (int)distance[i];
         }
+        
         numbers[6] = num9_11[0];
         numbers[7] = num9_11[1];
-        // ESP_LOGW(TAG,"NUMBER6 %d AND NUMBER7 %d",numbers[6],numbers[7]);
+        
+      // ESP_LOGW(TAG,"NUMBER6 %d AND NUMBER7 %d",numbers[6],numbers[7]);
         root = cJSON_CreateObject();
-        dataArray = cJSON_CreateIntArray(numbers, NO_OF_SENSORS);
+        dataArray = cJSON_CreateIntArray(numbers,8);
         cJSON_AddItemToObject(root, "u", dataArray);
         char *my_json_string = cJSON_PrintUnformatted(root);
         uint8_t data_send[strlen(my_json_string)];
@@ -449,12 +451,12 @@ void app_main(void)
 #ifdef CONFIG_J7_CONNECTOR_ENABLE
     USSE[CONFIG_J7_CONNECTOR_SENSOR_NO - 1] = 48;
 #endif
-#ifdef CONFIG_J9_CONNECTOR_ENABLE
-    USSE[CONFIG_J9_CONNECTOR_SENSOR_NO - 1] = 14;
-#endif
-#ifdef CONFIG_J11_CONNECTOR_ENABLE
-    USSE[CONFIG_J11_CONNECTOR_SENSOR_NO - 1] = 12;
-#endif
+// #ifdef CONFIG_J9_CONNECTOR_ENABLE
+//     USSE[CONFIG_J9_CONNECTOR_SENSOR_NO - 1] = 14;
+// #endif
+// #ifdef CONFIG_J11_CONNECTOR_ENABLE
+//     USSE[CONFIG_J11_CONNECTOR_SENSOR_NO - 1] = 13;
+// #endif
 
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)

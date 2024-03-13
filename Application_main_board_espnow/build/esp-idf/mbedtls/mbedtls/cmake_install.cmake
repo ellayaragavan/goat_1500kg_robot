@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
-  include("/home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
-  include("/home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("/home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("/home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
+  include("/home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
 
 endif()
 

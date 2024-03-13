@@ -1,4 +1,4 @@
-# Install script for directory: /home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/main
+# Install script for directory: /home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -103,12 +103,13 @@ static void espnow_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int len
     cJSON *root2 = cJSON_Parse(string_json);
     if (cJSON_HasObjectItem(root2, "u") | cJSON_HasObjectItem(root2, "cliff1"))
     {
+        vTaskDelay(10);
         cJSON_AddBoolToObject(root2, "emg", Emg.input_read);
         // cJSON_AddBoolToObject(root2, "reset", Reset.input_read);
         //  cJSON_AddBoolToObject(root2, "rf_switch", RF.input_read);
         cJSON_AddBoolToObject(root2, "bumper", bumper.input_read);
-        cJSON_AddBoolToObject(root2, "manual_switch_status", auto_manual_value.input_read);
-        cJSON_AddBoolToObject(root2, "execute_play_pause_switch_status", play_pause_read.input_read);
+       // cJSON_AddBoolToObject(root2, "manual_switch_status", auto_manual_value.input_read);
+        cJSON_AddBoolToObject(root2, "app_switch1", play_pause_read.input_read);
     }
     char *my_json_string = cJSON_PrintUnformatted(root2);
     uart_write_bytes(ECHO_UART_PORT_NUM, my_json_string, strlen(my_json_string));
@@ -121,7 +122,7 @@ static void espnow_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int len
 
 bool emergency_read()
 {
-    if (gpio_get_level(EMG_READ_INPUT) == LOW)
+    if (gpio_get_level(EMG_READ_INPUT) == HIGH)
     {
         Emg.input_count = Emg.input_count + 1;
         if (Emg.input_count >= EMG_SAMPLE_LIMIT)

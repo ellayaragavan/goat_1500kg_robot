@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/CMakeFiles/bootloader
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/CMakeFiles/bootloader.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/CMakeFiles/bootloader-complete.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/CMakeFiles/bootloader
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/CMakeFiles/bootloader.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/CMakeFiles/bootloader-complete.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

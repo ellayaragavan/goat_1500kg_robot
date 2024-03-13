@@ -1,8 +1,8 @@
 {
     "project_name":       "bootloader",
     "project_path":       "/home/katomaran-emb/esp/esp-idf/components/bootloader/subproject",
-    "build_dir":          "/home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/build/bootloader",
-    "config_file":        "/home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/sdkconfig",
+    "build_dir":          "/home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/build/bootloader",
+    "config_file":        "/home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/sdkconfig",
     "config_defaults":    "",
     "app_elf":            "bootloader.elf",
     "app_bin":            "bootloader.bin",

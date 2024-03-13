@@ -1,4 +1,4 @@
-/* * Data converted from /home/katomaran-emb/Goat-Robot-350Kg/Sensor_main_board_espnow/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

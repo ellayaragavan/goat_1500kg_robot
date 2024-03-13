@@ -1,4 +1,4 @@
-/* * Data converted from /home/katomaran-emb/Goat-Robot-350Kg/Application_main_board_espnow/components/ota_update/web/index.html
+/* * Data converted from /home/katomaran-emb/goat_1500kg_robot/Application_main_board_espnow/components/ota_update/web/index.html
  */
 .data
 .section .rodata.embedded

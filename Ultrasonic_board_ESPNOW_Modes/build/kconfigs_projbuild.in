@@ -1,0 +1,6 @@
+source "/home/katomaran-emb/esp/esp-idf/components/app_update/Kconfig.projbuild"
+source "/home/katomaran-emb/esp/esp-idf/components/bootloader/Kconfig.projbuild"
+source "/home/katomaran-emb/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
+source "/home/katomaran-emb/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "/home/katomaran-emb/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+source "/home/katomaran-emb/goat_1500kg_robot/Ultrasonic_board_ESPNOW_Modes/main/Kconfig.projbuild"
