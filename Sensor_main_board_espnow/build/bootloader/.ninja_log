@@ -109,3 +109,5 @@
 955	1362	1710229298578492836	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32s3/interrupts.c.obj	e34f4cb18a6d50f3
 4	106	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	5bc21b02c685eac5
 4	106	0	/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	5bc21b02c685eac5
+10	182	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	5bc21b02c685eac5
+10	182	0	/home/katomaran-emb/goat_1500kg_robot/Sensor_main_board_espnow/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	5bc21b02c685eac5

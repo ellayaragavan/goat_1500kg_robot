@@ -103,7 +103,6 @@ static void espnow_recv_cb(const uint8_t *mac_addr, const uint8_t *data, int len
     cJSON *root2 = cJSON_Parse(string_json);
     if (cJSON_HasObjectItem(root2, "u") | cJSON_HasObjectItem(root2, "cliff1"))
     {
-        vTaskDelay(10);
         cJSON_AddBoolToObject(root2, "emg", Emg.input_read);
         // cJSON_AddBoolToObject(root2, "reset", Reset.input_read);
         //  cJSON_AddBoolToObject(root2, "rf_switch", RF.input_read);

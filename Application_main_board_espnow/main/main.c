@@ -94,8 +94,8 @@
 
 /*-----------GPIO-Bit-Masking---------*/
 
-#define GPIO_BIT_MASK ((1ULL << EMG_RELAY_OUT) | (1ULL << DOCKING_RELAY) | (1ULL << BUZZER_PIN) | (1ULL << MOTOR_RELAY) | (1ULL << MAIN_SWITCH_RELAY)) 
-#define RF_BIT_MASK (1ULL << SWITCH_INPUT) | (1ULL << EXECUTE_SWITCH_INPUT) |(1ULL << SAFETY_SIGNAL_RELAY )
+#define GPIO_BIT_MASK ((1ULL << EMG_RELAY_OUT) | (1ULL << DOCKING_RELAY) | (1ULL << BUZZER_PIN) | (1ULL << MOTOR_RELAY) | (1ULL << MAIN_SWITCH_RELAY))
+#define RF_BIT_MASK (1ULL << SWITCH_INPUT) | (1ULL << EXECUTE_SWITCH_INPUT) | (1ULL << SAFETY_SIGNAL_RELAY)
 
 /*-----------RGB Board Number Definition---------*/
 #define UPPER_RGB 2
@@ -122,7 +122,7 @@ int32_t ota_data;
 
 // bool charging_status = false;
 uint8_t charging_status;
-bool emg_state = false, handshake_state, power_state = false, buzzer_value, motor_value;
+bool emg_state = false, handshake_state, power_state = false, buzzer_value, motor_value,docker_state;
 char *dock_state = NULL;
 char *recv_state = NULL;
 uint32_t board_no = 0;
@@ -153,7 +153,7 @@ uint8_t APPLICATION_MAC[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc2, 0x9b, 0x21}
 uint8_t DOCKING_MAC[ESP_NOW_ETH_ALEN] = {0x68, 0xb6, 0xb3, 0x47, 0xdc, 0xe8};
 uint8_t RGB_MAC_DOWN[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc3, 0x50, 0x90};
 uint8_t RGB_MAC_UP[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc2, 0x9b, 0x1c};
-//uint8_t main_board_mac[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc2, 0x91, 0x54};
+// uint8_t main_board_mac[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc2, 0x91, 0x54};
 /* structure contains rf input read and input count*/
 typedef struct read_param
 {
@@ -161,7 +161,7 @@ typedef struct read_param
     uint32_t input_count;
 } IO_READ;
 
-IO_READ app,safety_signal,excute_switch_status;
+IO_READ app, safety_signal, excute_switch_status;
 
 /* Enum contains a values of the UART and ESPrecv */
 enum key_value
@@ -183,7 +183,7 @@ enum key_value
     buzzer,
     motor_shutdown,
     power_fullshutdown,
-   // execute_reset_switch
+    docker_relaypin
 } key_string;
 
 /**
@@ -270,7 +270,7 @@ uint32_t key_identify(cJSON *rev_string)
     {
         return 16;
     }
-     else if (cJSON_HasObjectItem(rev_string, "execute_reset_switch"))
+    else if (cJSON_HasObjectItem(rev_string, "docker_relaypin"))
     {
         return 17;
     }
@@ -459,8 +459,8 @@ void adc_read_parameters()
         current_reading = current_sample / NO_OF_SAMPLES;
         voltage_reading = voltage_sample / NO_OF_SAMPLES;
         docking_reading = docking_sample / NO_OF_SAMPLES;
-       // printf("ADC VOLTAGE : %d\n", voltage_reading);
-        //printf("ADC CURRENT : %d\n", current_reading);
+        // printf("ADC VOLTAGE : %d\n", voltage_reading);
+        // printf("ADC CURRENT : %d\n", current_reading);
         // printf("current : %f\n",map(current_reading,IN_MIN,IN_MAX,OUT_MIN,OUT_MAX));
         vTaskDelay(pdMS_TO_TICKS(300));
     }
@@ -574,8 +574,8 @@ void json_control()
     io_conf.pull_up_en = GPIO_PULLUP_ENABLE;
     gpio_config(&io_conf);
     gpio_set_level(DOCKING_RELAY, 0);
-    gpio_set_level(MOTOR_RELAY,0);
-    gpio_set_level(BUZZER_PIN,0);
+    gpio_set_level(MOTOR_RELAY, 0);
+    gpio_set_level(BUZZER_PIN, 0);
     int intr_alloc_flags = 0;
     ESP_ERROR_CHECK(uart_driver_install(ECHO_UART_PORT_NUM, BUF_SIZE * 2, 0, 0, NULL, intr_alloc_flags));
     ESP_ERROR_CHECK(uart_param_config(ECHO_UART_PORT_NUM, &uart_config));
@@ -587,7 +587,7 @@ void json_control()
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
-    //esp_base_mac_addr_set(main_board_mac);
+    // esp_base_mac_addr_set(main_board_mac);
     wifi_init();
     if (esp_now_init() != ESP_OK)
     {
@@ -635,7 +635,7 @@ void json_control()
                 health_check_start_timer = esp_timer_get_time();
                 handshake_timer = esp_timer_get_time();
             }
-            switch(key_string)
+            switch (key_string)
             {
             case status:
                 cJSON_AddBoolToObject(root, "status", true);
@@ -645,11 +645,11 @@ void json_control()
                 key_string = ideal;
                 break;
             case data_fetch:
-                cJSON_AddNumberToObject(root,"battery",voltage_reading);
-                cJSON_AddNumberToObject(root,"charging",current_reading);
-                cJSON_AddBoolToObject(root,"power_switch_status",power_switch_status);
-                cJSON_AddBoolToObject(root,"safety_relay_status",safety_switch_status);
-                cJSON_AddBoolToObject(root,"app_switch2",excute_status);
+                cJSON_AddNumberToObject(root, "battery", voltage_reading);
+                cJSON_AddNumberToObject(root, "charging", current_reading);
+                cJSON_AddBoolToObject(root, "power_switch_status", power_switch_status);
+                cJSON_AddBoolToObject(root, "safety_relay_status", safety_switch_status);
+                cJSON_AddBoolToObject(root, "app_switch2", excute_status);
                 uart_send(root);
                 cJSON_Delete(root2);
                 key_string = ideal;
@@ -920,7 +920,6 @@ void json_control()
                     cJSON_AddBoolToObject(buzzer_status, "buzzer", true);
                     uart_send(buzzer_status);
                     key_string = ideal;
-                    
                 }
                 break;
             case motor_shutdown:
@@ -967,17 +966,24 @@ void json_control()
                 cJSON_Delete(root2);
                 break;
 
-            // case execute_reset_switch:
-            //      execute_state = cJSON_GetObjectItem(root2, "execute_reset_switch")->valueint;
-            //      if(execute_state == false)
-            //      {
-            //         excute_status = false;
-            //         cJSON *execute_value_status = cJSON_CreateObject();
-            //         cJSON_AddBoolToObject(execute_value_status, "execute_reset_switch", true);
-            //         uart_send(execute_value_status);
-            //         key_string = ideal;
-            //      }
-            //      break;
+                case docker_relaypin:
+                 docker_state = cJSON_GetObjectItem(root2, "docker_relaypin")->valueint;
+                 if(docker_state == true)
+                 {
+                    gpio_set_level(DOCKING_RELAY, 1);
+                     cJSON *docker_relayon = cJSON_CreateObject();
+                    cJSON_AddBoolToObject(root, "docker_relayon", true);
+                    uart_send(root);
+                    key_string = ideal;
+                 }
+                if(docker_state == false){
+                    gpio_set_level(DOCKING_RELAY, 0);
+                    cJSON *docker_relayon = cJSON_CreateObject();
+                    cJSON_AddBoolToObject(root, "docker_relayoff", true);
+                    uart_send(root);
+                    key_string = ideal;
+                }
+                 break;
             case ideal:
                 cJSON_Delete(root2);
                 cJSON_Delete(root);
@@ -1053,9 +1059,9 @@ void read_power_switch()
 
 bool execute_read()
 {
-        if (gpio_get_level(EXECUTE_SWITCH_INPUT) == LOW)
+    if (gpio_get_level(EXECUTE_SWITCH_INPUT) == LOW)
     {
-        excute_switch_status.input_count = safety_signal.input_count + 1;
+        excute_switch_status.input_count = excute_switch_status.input_count + 1;
         if (excute_switch_status.input_count >= EXECUTE_SWITCH_LIMIT)
         {
             return true;
@@ -1068,9 +1074,9 @@ bool execute_read()
     return false;
 }
 
-bool safety_signal_read ()
+bool safety_signal_read()
 {
-     if (gpio_get_level(SAFETY_SIGNAL_RELAY) == HIGH)
+    if (gpio_get_level(SAFETY_SIGNAL_RELAY) == LOW)
     {
         safety_signal.input_count = safety_signal.input_count + 1;
         if (safety_signal.input_count >= SAFETY_SWITCH_LIMIT)
@@ -1093,7 +1099,7 @@ void read_switch()
 {
     while (true)
     {
-        excute_status   = execute_read();
+        excute_status = execute_read();
         safety_switch_status = safety_signal_read();
 
         vTaskDelay(50 / portTICK_PERIOD_MS);

@@ -52,8 +52,8 @@
 led_strip_t *strip;
 
 static const char *TAG = "Docking";
-const uint8_t MAIN_BOARD_MAC[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc2, 0x91, 0x54}; // EC:94:CB:78:2F:89//ac:67:b2:3c:b3:75-new//ac:67:b2:3c:98:95
-const uint8_t NEW_MAC[ESP_NOW_ETH_ALEN] = {0x68, 0xb6, 0xb3, 0x47, 0xd6, 0x5c};
+const uint8_t MAIN_BOARD_MAC[ESP_NOW_ETH_ALEN] = {0xf4, 0x12, 0xfa, 0xc3, 0x4d, 0x00}; // EC:94:CB:78:2F:89//ac:67:b2:3c:b3:75-new//ac:67:b2:3c:98:95
+//const uint8_t NEW_MAC[ESP_NOW_ETH_ALEN] = {0x68, 0xb6, 0xb3, 0x47, 0xd6, 0x5c};
 
 static QueueHandle_t s_example_espnow_queue;
 

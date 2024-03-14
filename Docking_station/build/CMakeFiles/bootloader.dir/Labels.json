@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/CMakeFiles/bootloader"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/CMakeFiles/bootloader.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/CMakeFiles/bootloader-complete.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+		},
+		{
+			"file" : "/home/katomaran-emb/goat_1500kg_robot/Docking_station/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"bootloader"
+		],
+		"name" : "bootloader"
+	}
+}
